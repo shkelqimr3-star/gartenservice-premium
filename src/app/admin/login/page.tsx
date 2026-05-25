@@ -30,11 +30,11 @@ export default async function LoginPage({
           ) : null}
           <label className="mt-6 block text-sm font-semibold">
             E-Mail
-            <input name="email" type="email" required defaultValue="admin@gartenservice.de" className="mt-2 h-12 w-full rounded-[8px] border border-[#dfd2bc] bg-[#fbf8f2] px-4" />
+            <input name="email" type="email" required autoComplete="username" className="mt-2 h-12 w-full rounded-[8px] border border-[#dfd2bc] bg-[#fbf8f2] px-4" />
           </label>
           <label className="mt-4 block text-sm font-semibold">
             Passwort
-            <input name="password" type="password" required placeholder="change-me-now" className="mt-2 h-12 w-full rounded-[8px] border border-[#dfd2bc] bg-[#fbf8f2] px-4" />
+            <input name="password" type="password" required autoComplete="current-password" className="mt-2 h-12 w-full rounded-[8px] border border-[#dfd2bc] bg-[#fbf8f2] px-4" />
           </label>
           <button className="mt-6 h-12 w-full rounded-full bg-[#17352a] font-semibold text-white transition hover:bg-[#234a3b]">
             Einloggen

@@ -1,6 +1,5 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import bcrypt from "bcryptjs";
 
 const SESSION_COOKIE = "garten_admin_session";
 
@@ -20,14 +19,16 @@ export async function requireAdmin() {
 }
 
 export async function loginAdmin(email: string, password: string) {
-  const adminEmail = process.env.ADMIN_EMAIL || "admin@gartenservice.de";
-  const adminPassword = process.env.ADMIN_PASSWORD || "change-me-now";
-  const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
+  const adminEmail = process.env.ADMIN_EMAIL;
+  const adminPassword = process.env.ADMIN_PASSWORD;
+
+  if (!adminEmail || !adminPassword) {
+    console.error("Missing ADMIN_EMAIL or ADMIN_PASSWORD environment variable.");
+    return false;
+  }
 
   const emailMatches = email.trim().toLowerCase() === adminEmail.toLowerCase();
-  const passwordMatches = adminPasswordHash
-    ? await bcrypt.compare(password, adminPasswordHash)
-    : password === adminPassword;
+  const passwordMatches = password === adminPassword;
 
   if (!emailMatches || !passwordMatches) {
     return false;
