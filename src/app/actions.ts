@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
-import { loginAdmin, logoutAdmin, requireAdmin } from "@/lib/auth";
+import { logoutAdmin, requireAdmin } from "@/lib/auth";
 import { mkdir, writeFile } from "fs/promises";
 import path from "path";
 
@@ -40,14 +40,6 @@ export async function submitContactRequest(formData: FormData) {
   }
 
   redirect("/?kontakt=gesendet#kontakt");
-}
-
-export async function adminLoginAction(formData: FormData) {
-  const success = await loginAdmin(String(formData.get("email")), String(formData.get("password")));
-  if (!success) {
-    redirect("/admin/login?error=1");
-  }
-  redirect("/admin");
 }
 
 export async function logoutAction() {

@@ -27,7 +27,7 @@ export async function loginAdmin(email: string, password: string) {
     return false;
   }
 
-  const emailMatches = email.trim().toLowerCase() === adminEmail.toLowerCase();
+  const emailMatches = email.trim().toLowerCase() === adminEmail.trim().toLowerCase();
   const passwordMatches = password === adminPassword;
 
   if (!emailMatches || !passwordMatches) {
