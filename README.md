@@ -23,13 +23,27 @@ ADMIN_PASSWORD="change-me-now"
 
 ## Database
 
-Local development uses SQLite:
+Production and local development use PostgreSQL through Prisma. For Vercel, set `DATABASE_URL` to your Neon PostgreSQL connection string in the Vercel project environment variables.
+
+Local development can use either a local PostgreSQL server or a Neon development branch:
 
 ```txt
-DATABASE_URL="file:./dev.db"
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/gartenservice_premium?schema=public"
 ```
 
-The Prisma models are intentionally provider-portable. For a later Vercel production switch to PostgreSQL/Neon, change the datasource provider in `prisma/schema.prisma` back to `postgresql`, set `DATABASE_URL` to the Neon connection string in Vercel, and create a production PostgreSQL migration from the same models.
+For Neon, use the pooled connection string for the runtime `DATABASE_URL` in Vercel. Apply migrations with a PostgreSQL `DATABASE_URL` before deploying or through your deployment workflow:
+
+```bash
+npm run prisma:generate
+npm run prisma:deploy
+npm run prisma:seed
+```
+
+For local schema changes against a local PostgreSQL database or Neon development branch:
+
+```bash
+npm run prisma:migrate -- --name your_migration_name
+```
 
 ## Useful Commands
 
