@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  priceNote   String?
+  icon        String?
+  order       Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  location    String?
+  description String
+  beforeImage String?
+  afterImage  String
+  serviceType String?
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model BusinessSettings {
+  id          String   @id @default("business")
+  companyName String   @default("Gartenservice Grünwert")
+  phone       String   @default("+49 170 1234567")
+  whatsapp    String   @default("+491701234567")
+  email       String   @default("kontakt@gartenservice-gruenwert.de")
+  address     String   @default("Musterstraße 12, 50667 Köln")
+  serviceArea String   @default("Köln, Bonn, Leverkusen und Umgebung")
+  heroTitle   String   @default("Premium Gartenservice für gepflegte Außenbereiche")
+  heroText    String   @default("Hecken, Rasen, Bäume und komplette Gartenpflege aus einer Hand. Verlässlich, sauber und mit einem Blick fürs Detail.")
+  heroImage   String?
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactRequest {
+  id        String   @id @default(cuid())
+  name      String
+  email     String?
+  phone     String
+  message   String
+  service   String?
+  status    String   @default("Neu")
+  createdAt DateTime @default(now())
+}

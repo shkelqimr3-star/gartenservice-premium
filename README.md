@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gartenservice Premium
 
-## Getting Started
+Premium Next.js App Router website with an admin panel for a German garden service business.
 
-First, run the development server:
+## Local Development
 
 ```bash
+npm install
+npm run prisma:generate
+npm run prisma:migrate -- --name init
+npm run prisma:seed
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Admin login defaults are configured in `.env`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```txt
+ADMIN_EMAIL="admin@gartenservice.de"
+ADMIN_PASSWORD="change-me-now"
+```
 
-## Learn More
+## Database
 
-To learn more about Next.js, take a look at the following resources:
+Local development uses SQLite:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```txt
+DATABASE_URL="file:./dev.db"
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The Prisma models are intentionally provider-portable. For a later Vercel production switch to PostgreSQL/Neon, change the datasource provider in `prisma/schema.prisma` back to `postgresql`, set `DATABASE_URL` to the Neon connection string in Vercel, and create a production PostgreSQL migration from the same models.
 
-## Deploy on Vercel
+## Useful Commands
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint
+npm run build
+npm run prisma:generate
+npm run prisma:migrate -- --name init
+npm run prisma:seed
+```
