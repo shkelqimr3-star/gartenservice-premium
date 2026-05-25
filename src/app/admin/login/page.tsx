@@ -31,6 +31,7 @@ export default async function LoginPage({
       <section className="flex items-center justify-center">
         <form
           action={adminLoginAction}
+          method="post"
           className="w-full max-w-md rounded-[8px] border border-white/12 bg-white p-8 text-[#17352a] shadow-2xl"
         >
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#17352a] text-[#d8c39a]">

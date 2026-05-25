@@ -2,14 +2,16 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 const SESSION_COOKIE = "garten_admin_session";
+const SESSION_MAX_AGE = 60 * 60 * 8;
 
 function sessionValue() {
-  return process.env.SESSION_SECRET || "dev-session-secret";
+  return (process.env.SESSION_SECRET || "dev-session-secret").trim();
 }
 
 export async function isAdminAuthenticated() {
   const store = await cookies();
-  return store.get(SESSION_COOKIE)?.value === sessionValue();
+  const sessionCookie = store.get(SESSION_COOKIE)?.value;
+  return Boolean(sessionCookie) && sessionCookie === sessionValue();
 }
 
 export async function requireAdmin() {
@@ -35,12 +37,14 @@ export async function loginAdmin(email: string, password: string) {
   }
 
   const store = await cookies();
+  const isProduction = process.env.NODE_ENV === "production";
+
   store.set(SESSION_COOKIE, sessionValue(), {
     httpOnly: true,
     sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
+    secure: isProduction,
     path: "/",
-    maxAge: 60 * 60 * 8,
+    maxAge: SESSION_MAX_AGE,
   });
 
   return true;
