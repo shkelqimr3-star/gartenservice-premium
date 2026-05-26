@@ -19,6 +19,7 @@ Admin login defaults are configured in `.env`:
 ```txt
 ADMIN_EMAIL="admin@gartenservice.de"
 ADMIN_PASSWORD="change-me-now"
+BLOB_READ_WRITE_TOKEN="vercel_blob_read_write_token"
 ```
 
 ## Database
@@ -44,6 +45,16 @@ For local schema changes against a local PostgreSQL database or Neon development
 ```bash
 npm run prisma:migrate -- --name your_migration_name
 ```
+
+## Image Uploads
+
+Admin uploads for hero images and project before/after images use Vercel Blob in production. Set this environment variable in Vercel:
+
+```txt
+BLOB_READ_WRITE_TOKEN="..."
+```
+
+Uploaded images are stored in Vercel Blob and only the public image URL is saved in Neon/PostgreSQL. Local development falls back to `public/uploads` when `BLOB_READ_WRITE_TOKEN` is not set.
 
 ## Useful Commands
 

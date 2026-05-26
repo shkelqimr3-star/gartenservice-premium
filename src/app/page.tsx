@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { ArrowRight, BadgeCheck, Clock, MessageCircle, Phone, ShieldCheck, Sparkles } from "lucide-react";
-import Image from "next/image";
 import { submitContactRequest } from "@/app/actions";
 import { ServiceIcon } from "@/components/icons";
+import { SmartImage } from "@/components/smart-image";
 import { getBusinessSettings, getProjects, getServices } from "@/lib/data";
 import { businessInfo, seoKeywords, siteUrl } from "@/lib/site";
 
@@ -194,7 +194,7 @@ export default async function Home({
                 <div className="grid grid-cols-2">
                   {[project.beforeImage, project.afterImage].map((image, index) => (
                     <div key={`${project.id}-${index}`} className="relative h-56 overflow-hidden bg-[#d8c39a]">
-                      {image ? <Image src={image} alt="" fill sizes="(min-width: 1024px) 17vw, 50vw" className="object-cover" /> : null}
+                      {image ? <SmartImage src={image} alt="" fill sizes="(min-width: 1024px) 17vw, 50vw" className="object-cover" /> : null}
                       <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-[#17352a]">
                         {index === 0 ? "Vorher" : "Nachher"}
                       </span>

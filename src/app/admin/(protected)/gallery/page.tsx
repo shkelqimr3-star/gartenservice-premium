@@ -1,17 +1,29 @@
 import { deleteProjectAction, saveProjectAction } from "@/app/actions";
 import { SubmitButton, TextAreaField, TextField } from "@/components/admin-fields";
+import { SmartImage } from "@/components/smart-image";
 import { getProjects } from "@/lib/data";
-import Image from "next/image";
+import { uploadErrorMessage } from "@/lib/uploads";
 
 export const dynamic = "force-dynamic";
 
-export default async function GalleryAdminPage() {
+export default async function GalleryAdminPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ uploadError?: string }>;
+}) {
+  const params = await searchParams;
   const projects = await getProjects();
+  const uploadError = uploadErrorMessage(params?.uploadError);
 
   return (
     <div>
       <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#8b6f42]">Upload & CRUD</p>
       <h2 className="mt-2 text-4xl font-semibold text-[#17352a]">Projektgalerie</h2>
+      {uploadError ? (
+        <div className="mt-6 rounded-[8px] border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
+          {uploadError}
+        </div>
+      ) : null}
       <section className="mt-8 rounded-[8px] border border-[#dfd2bc] bg-white p-6">
         <h3 className="text-xl font-semibold">Neues Projekt</h3>
         <ProjectForm />
@@ -22,12 +34,12 @@ export default async function GalleryAdminPage() {
             <div className="mb-5 grid grid-cols-2 gap-3">
               {project.beforeImage ? (
                 <div className="relative h-32 overflow-hidden rounded-[8px]">
-                  <Image src={project.beforeImage} alt="" fill sizes="280px" className="object-cover" />
+                  <SmartImage src={project.beforeImage} alt="" fill sizes="280px" className="object-cover" />
                 </div>
               ) : <div className="h-32 rounded-[8px] bg-[#f8f3ea]" />}
               {project.afterImage ? (
                 <div className="relative h-32 overflow-hidden rounded-[8px]">
-                  <Image src={project.afterImage} alt="" fill sizes="280px" className="object-cover" />
+                  <SmartImage src={project.afterImage} alt="" fill sizes="280px" className="object-cover" />
                 </div>
               ) : <div className="h-32 rounded-[8px] bg-[#f8f3ea]" />}
             </div>
@@ -63,11 +75,11 @@ function ProjectForm({
       <TextField label="Leistungsart" name="serviceType" defaultValue={project?.serviceType} />
       <label className="block text-sm font-semibold text-[#17352a]">
         Vorher-Bild
-        <input name="beforeImage" type="file" accept="image/*" className="mt-2 w-full rounded-[8px] border border-[#dfd2bc] bg-white px-3 py-2 text-sm" />
+        <input name="beforeImage" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" className="mt-2 w-full rounded-[8px] border border-[#dfd2bc] bg-white px-3 py-2 text-sm" />
       </label>
       <label className="block text-sm font-semibold text-[#17352a]">
         Nachher-Bild
-        <input name="afterImage" type="file" accept="image/*" className="mt-2 w-full rounded-[8px] border border-[#dfd2bc] bg-white px-3 py-2 text-sm" />
+        <input name="afterImage" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" className="mt-2 w-full rounded-[8px] border border-[#dfd2bc] bg-white px-3 py-2 text-sm" />
       </label>
       <div className="md:col-span-2">
         <TextAreaField label="Beschreibung" name="description" defaultValue={project?.description} />

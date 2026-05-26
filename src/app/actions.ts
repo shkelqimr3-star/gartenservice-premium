@@ -5,8 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { logoutAdmin, requireAdmin } from "@/lib/auth";
-import { mkdir, writeFile } from "fs/promises";
-import path from "path";
+import { uploadImage, UploadError } from "@/lib/uploads";
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -15,23 +14,6 @@ const contactSchema = z.object({
   service: z.string().optional(),
   message: z.string().min(10),
 });
-
-async function uploadImage(file: File | null) {
-  if (!file || file.size === 0) return undefined;
-  const bytes = Buffer.from(await file.arrayBuffer());
-
-  if (process.env.VERCEL === "1") {
-    const mimeType = file.type || "image/jpeg";
-    return `data:${mimeType};base64,${bytes.toString("base64")}`;
-  }
-
-  const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, "-").toLowerCase();
-  const filename = `${Date.now()}-${safeName}`;
-  const uploadDir = path.join(process.cwd(), "public", "uploads");
-  await mkdir(uploadDir, { recursive: true });
-  await writeFile(path.join(uploadDir, filename), bytes);
-  return `/uploads/${filename}`;
-}
 
 export async function submitContactRequest(formData: FormData) {
   const parsed = contactSchema.safeParse(Object.fromEntries(formData));
@@ -85,8 +67,20 @@ export async function deleteServiceAction(formData: FormData) {
 export async function saveProjectAction(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id") || "");
-  const beforeImage = await uploadImage(formData.get("beforeImage") as File | null);
-  const afterImage = await uploadImage(formData.get("afterImage") as File | null);
+  let beforeImage: string | undefined;
+  let afterImage: string | undefined;
+
+  try {
+    beforeImage = await uploadImage(formData.get("beforeImage") as File | null, "projects");
+    afterImage = await uploadImage(formData.get("afterImage") as File | null, "projects");
+  } catch (error) {
+    if (error instanceof UploadError) {
+      redirect(`/admin/gallery?uploadError=${error.code}`);
+    }
+    console.error("Project image upload failed.", error);
+    redirect("/admin/gallery?uploadError=failed");
+  }
+
   const data = {
     title: String(formData.get("title")),
     location: String(formData.get("location") || ""),
@@ -116,7 +110,18 @@ export async function deleteProjectAction(formData: FormData) {
 
 export async function saveSettingsAction(formData: FormData) {
   await requireAdmin();
-  const heroImage = await uploadImage(formData.get("heroImage") as File | null);
+  let heroImage: string | undefined;
+
+  try {
+    heroImage = await uploadImage(formData.get("heroImage") as File | null, "hero");
+  } catch (error) {
+    if (error instanceof UploadError) {
+      redirect(`/admin/settings?uploadError=${error.code}`);
+    }
+    console.error("Hero image upload failed.", error);
+    redirect("/admin/settings?uploadError=failed");
+  }
+
   await prisma.businessSettings.upsert({
     where: { id: "business" },
     update: {
