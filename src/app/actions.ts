@@ -19,6 +19,12 @@ const contactSchema = z.object({
 async function uploadImage(file: File | null) {
   if (!file || file.size === 0) return undefined;
   const bytes = Buffer.from(await file.arrayBuffer());
+
+  if (process.env.VERCEL === "1") {
+    const mimeType = file.type || "image/jpeg";
+    return `data:${mimeType};base64,${bytes.toString("base64")}`;
+  }
+
   const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, "-").toLowerCase();
   const filename = `${Date.now()}-${safeName}`;
   const uploadDir = path.join(process.cwd(), "public", "uploads");

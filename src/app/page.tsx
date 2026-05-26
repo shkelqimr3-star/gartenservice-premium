@@ -5,6 +5,7 @@ import { ServiceIcon } from "@/components/icons";
 import { getBusinessSettings, getProjects, getServices } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export default async function Home({
   searchParams,

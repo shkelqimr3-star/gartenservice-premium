@@ -1,6 +1,8 @@
 import { AdminNav } from "@/components/admin-nav";
 import { requireAdmin } from "@/lib/auth";
 
+export const runtime = "nodejs";
+
 export default async function ProtectedAdminLayout({ children }: { children: React.ReactNode }) {
   await requireAdmin();
 
