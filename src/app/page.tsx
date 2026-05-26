@@ -1,11 +1,30 @@
+import type { Metadata } from "next";
 import { ArrowRight, BadgeCheck, Clock, MessageCircle, Phone, ShieldCheck, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { submitContactRequest } from "@/app/actions";
 import { ServiceIcon } from "@/components/icons";
 import { getBusinessSettings, getProjects, getServices } from "@/lib/data";
+import { businessInfo, seoKeywords, siteUrl } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
+
+export const metadata: Metadata = {
+  title: "Gartenservice Backnang | Gartenpflege, Hecken & Rasen",
+  description:
+    "Gartenservice Sami & Co. in Backnang: Gartenpflege, Hecke schneiden, Rasen maehen, Baeume faellen und Gruenschnitt-Abtransport in Backnang und Umgebung.",
+  keywords: seoKeywords,
+  alternates: {
+    canonical: siteUrl,
+  },
+  openGraph: {
+    title: "Gartenservice Backnang | Gartenservice Sami & Co.",
+    description:
+      "Zuverlaessige Gartenpflege in Backnang und Umgebung: Hecken schneiden, Rasen maehen, Baeume faellen und Abtransport.",
+    url: siteUrl,
+    type: "website",
+  },
+};
 
 export default async function Home({
   searchParams,
@@ -21,9 +40,53 @@ export default async function Home({
 
   const whatsappHref = `https://wa.me/${settings.whatsapp.replace(/\D/g, "")}`;
   const heroImage = settings.heroImage || "";
+  const localBusinessJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${siteUrl}/#localbusiness`,
+    name: businessInfo.name,
+    url: siteUrl,
+    telephone: businessInfo.phone,
+    email: businessInfo.email,
+    image: heroImage,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: businessInfo.streetAddress,
+      postalCode: businessInfo.postalCode,
+      addressLocality: businessInfo.addressLocality,
+      addressCountry: businessInfo.addressCountry,
+    },
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Backnang",
+      },
+      {
+        "@type": "AdministrativeArea",
+        name: "Backnang und Umgebung",
+      },
+    ],
+    description:
+      "Gartenservice Sami & Co. bietet Gartenpflege, Hecke schneiden, Rasen maehen, Baeume faellen und Gruenschnitt-Abtransport in Backnang und Umgebung.",
+    keywords: seoKeywords.join(", "),
+    priceRange: "$$",
+    sameAs: [whatsappHref],
+    makesOffer: [
+      "Gartenservice Backnang",
+      "Gartenpflege Backnang",
+      "Hecke schneiden Backnang",
+      "Rasen maehen Backnang",
+      "Baeume faellen Backnang",
+      "Entsorgung und Abtransport von Gruenschnitt",
+    ],
+  };
 
   return (
     <main className="overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+      />
       <section className="relative min-h-[92svh] bg-[#123126] text-white">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroImage})` }} />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,34,27,.92),rgba(12,34,27,.64),rgba(12,34,27,.2))]" />
@@ -94,7 +157,7 @@ export default async function Home({
               Gartenpflege, die verlaesslich erledigt wird.
             </h2>
             <p className="mt-5 text-base leading-7 text-[#5e6c62]">
-              Von der einzelnen Hecke bis zur regelmaessigen Grundstueckspflege: Wir arbeiten sauber, stimmen Termine klar ab und verlassen die Flaeche ordentlich.
+              Von der einzelnen Hecke bis zur regelmaessigen Gartenpflege in Backnang: Wir schneiden Hecken, maehen Rasen, uebernehmen Baumarbeiten und verlassen jede Flaeche ordentlich.
             </p>
           </div>
           <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
