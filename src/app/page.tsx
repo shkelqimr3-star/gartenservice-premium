@@ -25,10 +25,7 @@ export default async function Home({
   return (
     <main className="overflow-hidden">
       <section className="relative min-h-[92svh] bg-[#123126] text-white">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroImage})` }} />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,34,27,.92),rgba(12,34,27,.64),rgba(12,34,27,.2))]" />
         <div className="relative mx-auto flex min-h-[92svh] w-full max-w-7xl flex-col px-5 py-5 sm:px-8 lg:px-10">
           <header className="flex items-center justify-between gap-4 rounded-full border border-white/15 bg-white/10 px-4 py-3 backdrop-blur-md">
@@ -53,7 +50,7 @@ export default async function Home({
             <div className="max-w-3xl">
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/12 px-4 py-2 text-sm text-white/85 backdrop-blur">
                 <Sparkles className="h-4 w-4 text-[#d8c39a]" />
-                Gepflegte Gärten. Saubere Arbeit. Verlässliche Termine.
+                Gepflegte Gaerten. Saubere Arbeit. Direkter Ansprechpartner.
               </div>
               <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] tracking-normal sm:text-6xl lg:text-7xl">
                 {settings.heroTitle}
@@ -79,7 +76,7 @@ export default async function Home({
           </div>
 
           <div className="grid gap-3 pb-5 sm:grid-cols-3">
-            {["Kostenlose Ersteinschätzung", settings.serviceArea, "Abtransport auf Wunsch"].map((item) => (
+            {["Kostenlose Ersteinschaetzung", settings.serviceArea, "Abtransport auf Wunsch"].map((item) => (
               <div key={item} className="rounded-[8px] border border-white/14 bg-white/10 p-4 text-sm text-white/82 backdrop-blur-md">
                 <BadgeCheck className="mb-3 h-5 w-5 text-[#d8c39a]" />
                 {item}
@@ -94,8 +91,11 @@ export default async function Home({
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#8b6f42]">Leistungen</p>
             <h2 className="mt-3 text-4xl font-semibold tracking-normal text-[#17352a] sm:text-5xl">
-              Alles für einen Garten, der sofort gepflegt wirkt.
+              Gartenpflege, die verlaesslich erledigt wird.
             </h2>
+            <p className="mt-5 text-base leading-7 text-[#5e6c62]">
+              Von der einzelnen Hecke bis zur regelmaessigen Grundstueckspflege: Wir arbeiten sauber, stimmen Termine klar ab und verlassen die Flaeche ordentlich.
+            </p>
           </div>
           <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
             {services.map((service) => (
@@ -105,9 +105,7 @@ export default async function Home({
                 </div>
                 <h3 className="mt-6 text-xl font-semibold text-[#17352a]">{service.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-[#5e6c62]">{service.description}</p>
-                {service.priceNote ? (
-                  <p className="mt-5 text-sm font-semibold text-[#8b6f42]">{service.priceNote}</p>
-                ) : null}
+                {service.priceNote ? <p className="mt-5 text-sm font-semibold text-[#8b6f42]">{service.priceNote}</p> : null}
               </article>
             ))}
           </div>
@@ -120,11 +118,11 @@ export default async function Home({
             <div className="max-w-2xl">
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#8b6f42]">Vorher / Nachher</p>
               <h2 className="mt-3 text-4xl font-semibold tracking-normal text-[#17352a] sm:text-5xl">
-                Sichtbare Ergebnisse statt leerer Versprechen.
+                Sichtbare Ergebnisse mit sauberer Uebergabe.
               </h2>
             </div>
             <p className="max-w-md text-base leading-7 text-[#5e6c62]">
-              Ausgewählte Projekte mit klarer Dokumentation, sauberer Ausführung und ordentlicher Übergabe.
+              Ausgewaehlte Arbeiten aus Gartenpflege, Heckenschnitt und Gruenschnitt-Abtransport.
             </p>
           </div>
           <div className="mt-12 grid gap-5 lg:grid-cols-3">
@@ -156,14 +154,14 @@ export default async function Home({
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#d8c39a]">Warum wir</p>
             <h2 className="mt-3 text-4xl font-semibold tracking-normal sm:text-5xl">
-              Premium-Service für Privatgärten und Außenanlagen.
+              Ein lokaler Gartenservice, der erreichbar bleibt.
             </h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             {[
-              { icon: ShieldCheck, title: "Sauber versichert", text: "Sorgfältige Arbeit mit professioneller Ausrüstung." },
-              { icon: Clock, title: "Planbare Termine", text: "Verlässliche Abstimmung und pünktliche Umsetzung." },
-              { icon: Sparkles, title: "Gepflegtes Finish", text: "Kanten, Schnittgut und Übergabe werden mitgedacht." },
+              { icon: ShieldCheck, title: "Sorgfaeltig", text: "Wir achten auf Umgebung, Pflanzenbestand und eine saubere Arbeitsweise." },
+              { icon: Clock, title: "Planbar", text: "Termine, Umfang und Abtransport werden vorab klar abgestimmt." },
+              { icon: Sparkles, title: "Ordentlich", text: "Nach dem Einsatz bleibt die Flaeche gepflegt und nutzbar zurueck." },
             ].map(({ icon: Icon, title, text }) => (
               <div key={title} className="rounded-[8px] border border-white/12 bg-white/8 p-6">
                 <Icon className="h-7 w-7 text-[#d8c39a]" strokeWidth={1.7} />
@@ -180,7 +178,7 @@ export default async function Home({
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#8b6f42]">Kontakt</p>
             <h2 className="mt-3 text-4xl font-semibold tracking-normal text-[#17352a] sm:text-5xl">
-              Beschreiben Sie kurz Ihr Projekt.
+              Beschreiben Sie kurz Ihr Gartenprojekt.
             </h2>
             <div className="mt-8 space-y-4 text-[#5e6c62]">
               <p className="flex items-center gap-3"><Phone className="h-5 w-5 text-[#8b6f42]" /> {settings.phone}</p>
@@ -222,9 +220,9 @@ export default async function Home({
           <p className="text-white">{settings.companyName}</p>
           <p>{settings.phone} · WhatsApp {settings.whatsapp} · {settings.serviceArea}</p>
           <div className="flex gap-5">
-            <a href="#">Impressum</a>
-            <a href="#">Datenschutz</a>
-            <a href="/admin/login">Admin</a>
+            <a href="/impressum" className="hover:text-white">Impressum</a>
+            <a href="/datenschutz" className="hover:text-white">Datenschutz</a>
+            <a href="/admin/login" className="hover:text-white">Admin</a>
           </div>
         </div>
       </footer>

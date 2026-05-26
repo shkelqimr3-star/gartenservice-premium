@@ -1,13 +1,13 @@
 export const fallbackSettings = {
-  companyName: "Gartenservice Grünwert",
-  phone: "+49 170 1234567",
-  whatsapp: "+491701234567",
-  email: "kontakt@gartenservice-gruenwert.de",
-  address: "Musterstraße 12, 50667 Köln",
-  serviceArea: "Köln, Bonn, Leverkusen und Umgebung",
-  heroTitle: "Premium Gartenservice für gepflegte Außenbereiche",
+  companyName: "Gartenservice Sami & Co.",
+  phone: "+49 176 41178833",
+  whatsapp: "+4917641178833",
+  email: "hotis@outlook.de",
+  address: "Etzwiesenstrasse 7, 71522 Backnang",
+  serviceArea: "Backnang und Umgebung",
+  heroTitle: "Zuverlaessiger Gartenservice in Backnang und Umgebung",
   heroText:
-    "Hecken, Rasen, Bäume und komplette Gartenpflege aus einer Hand. Verlässlich, sauber und mit einem Blick fürs Detail.",
+    "Wir kuemmern uns um Hecken, Rasen, Baumarbeiten und laufende Gartenpflege. Sauber, termintreu und mit direktem Ansprechpartner vor Ort.",
   heroImage:
     "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=2200&q=85",
 };
@@ -17,26 +17,26 @@ export const fallbackServices = [
     id: "hecke",
     title: "Hecke schneiden",
     description:
-      "Form- und Pflegeschnitt für saubere Grundstückskanten, Sichtschutzhecken und repräsentative Eingänge.",
+      "Praeziser Hecken- und Formschnitt fuer gepflegte Grundstuecksgrenzen, Sichtschutzhecken und Einfahrten. Wir arbeiten sauber, achten auf die passende Schnittzeit und nehmen den Gruenschnitt auf Wunsch direkt mit.",
     priceNote: "Nach Besichtigung",
     icon: "Scissors",
     order: 1,
   },
   {
     id: "rasen",
-    title: "Rasen mähen",
+    title: "Rasen maehen",
     description:
-      "Regelmäßige Rasenpflege inklusive Kanten, Feinschnitt und saisonaler Pflegeempfehlung.",
-    priceNote: "Abo möglich",
+      "Regelmaessiges Rasenmaehen inklusive sauberer Kanten, ordentlicher Flaechenpflege und kurzer Abstimmung zur saisonalen Pflege. Ideal fuer Privatgaerten, Mietobjekte und kleinere Gewerbeflaechen.",
+    priceNote: "Einmalig oder regelmaessig",
     icon: "Leaf",
     order: 2,
   },
   {
     id: "baeume",
-    title: "Bäume fällen",
+    title: "Baeume faellen",
     description:
-      "Sichere Baumfällung, Rückschnitt und Vorbereitung der Entsorgung für private und gewerbliche Flächen.",
-    priceNote: "Mit Vor-Ort-Prüfung",
+      "Sorgfaeltige Baumfaellung, Rueckschnitt und Vorbereitung des Abtransports nach vorheriger Einschaetzung vor Ort. Wir achten auf Sicherheit, Umgebung und eine ordentliche Uebergabe der Flaeche.",
+    priceNote: "Mit Vor-Ort-Pruefung",
     icon: "TreePine",
     order: 3,
   },
@@ -44,8 +44,8 @@ export const fallbackServices = [
     id: "pflege",
     title: "Gartenpflege",
     description:
-      "Ganzheitliche Pflege von Beeten, Wegen, Sträuchern und Außenanlagen mit einem gepflegten Finish.",
-    priceNote: "Individuell",
+      "Ganzheitliche Gartenpflege fuer Beete, Straeucher, Wege und Aussenanlagen. Wir bringen Struktur in den Garten, entfernen Wildwuchs und sorgen fuer ein gepflegtes Gesamtbild.",
+    priceNote: "Individuell planbar",
     icon: "Sprout",
     order: 4,
   },
@@ -53,7 +53,7 @@ export const fallbackServices = [
     id: "entsorgung",
     title: "Entsorgung / Abtransport",
     description:
-      "Sauberer Abtransport von Grünschnitt, Ästen, Stammholz und Gartenabfällen nach dem Einsatz.",
+      "Abtransport von Gruenschnitt, Aesten, Laub, Stammholz und Gartenabfaellen nach dem Einsatz. So bleibt Ihr Garten nicht nur gepflegt, sondern auch direkt sauber nutzbar.",
     priceNote: "Optional zubuchbar",
     icon: "Truck",
     order: 5,
@@ -62,10 +62,10 @@ export const fallbackServices = [
 
 export const fallbackProjects = [
   {
-    id: "vorgarten-koeln",
-    title: "Vorgartenpflege in Köln",
-    location: "Köln-Lindenthal",
-    description: "Heckenschnitt, Rasenkanten und vollständiger Abtransport an einem Arbeitstag.",
+    id: "vorgarten-backnang",
+    title: "Vorgartenpflege in Backnang",
+    location: "Backnang",
+    description: "Heckenschnitt, Rasenkanten und vollstaendiger Abtransport an einem Arbeitstag.",
     beforeImage:
       "https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&w=1200&q=80",
     afterImage:
@@ -74,10 +74,10 @@ export const fallbackProjects = [
     featured: true,
   },
   {
-    id: "hecke-bonn",
+    id: "hecke-backnang",
     title: "Formschnitt einer Sichtschutzhecke",
-    location: "Bonn",
-    description: "Präziser Rückschnitt einer hohen Hecke mit sauberer Übergabe.",
+    location: "Backnang und Umgebung",
+    description: "Praeziser Rueckschnitt einer hohen Hecke mit sauberer Uebergabe.",
     beforeImage:
       "https://images.unsplash.com/photo-1599685315640-9ceab521f7a0?auto=format&fit=crop&w=1200&q=80",
     afterImage:
@@ -86,15 +86,15 @@ export const fallbackProjects = [
     featured: true,
   },
   {
-    id: "baum-leverkusen",
-    title: "Baumrückschnitt mit Abtransport",
-    location: "Leverkusen",
-    description: "Sicherer Rückschnitt, Zerkleinerung und Entsorgung des Schnittguts.",
+    id: "baum-backnang",
+    title: "Baumrueckschnitt mit Abtransport",
+    location: "Rems-Murr-Kreis",
+    description: "Sicherer Rueckschnitt, Zerkleinerung und Entsorgung des Schnittguts.",
     beforeImage:
       "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
     afterImage:
       "https://images.unsplash.com/photo-1558693168-c370615b54e0?auto=format&fit=crop&w=1200&q=80",
-    serviceType: "Bäume fällen",
+    serviceType: "Baeume faellen",
     featured: false,
   },
 ];

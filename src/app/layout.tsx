@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Gartenservice Grünwert | Premium Gartenpflege",
+  title: "Gartenservice Sami & Co. | Gartenpflege in Backnang",
   description:
-    "Professioneller Gartenservice für Hecken, Rasen, Baumarbeiten, Gartenpflege und Entsorgung in Köln, Bonn und Umgebung.",
+    "Zuverlaessiger Gartenservice fuer Hecken, Rasen, Baumarbeiten, Gartenpflege und Entsorgung in Backnang und Umgebung.",
 };
 
 export default function RootLayout({

@@ -34,14 +34,14 @@ model Project {
 
 model BusinessSettings {
   id          String   @id @default("business")
-  companyName String   @default("Gartenservice Grünwert")
-  phone       String   @default("+49 170 1234567")
-  whatsapp    String   @default("+491701234567")
-  email       String   @default("kontakt@gartenservice-gruenwert.de")
-  address     String   @default("Musterstraße 12, 50667 Köln")
-  serviceArea String   @default("Köln, Bonn, Leverkusen und Umgebung")
-  heroTitle   String   @default("Premium Gartenservice für gepflegte Außenbereiche")
-  heroText    String   @default("Hecken, Rasen, Bäume und komplette Gartenpflege aus einer Hand. Verlässlich, sauber und mit einem Blick fürs Detail.")
+  companyName String   @default("Gartenservice Sami & Co.")
+  phone       String   @default("+49 176 41178833")
+  whatsapp    String   @default("+4917641178833")
+  email       String   @default("hotis@outlook.de")
+  address     String   @default("Etzwiesenstrasse 7, 71522 Backnang")
+  serviceArea String   @default("Backnang und Umgebung")
+  heroTitle   String   @default("Zuverlaessiger Gartenservice in Backnang und Umgebung")
+  heroText    String   @default("Wir kuemmern uns um Hecken, Rasen, Baumarbeiten und laufende Gartenpflege. Sauber, termintreu und mit direktem Ansprechpartner vor Ort.")
   heroImage   String?
   updatedAt   DateTime @updatedAt
 }

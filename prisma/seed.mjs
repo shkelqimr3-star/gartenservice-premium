@@ -5,29 +5,76 @@ const prisma = new PrismaClient();
 async function main() {
   await prisma.businessSettings.upsert({
     where: { id: "business" },
-    update: {},
+    update: {
+      companyName: "Gartenservice Sami & Co.",
+      phone: "+49 176 41178833",
+      whatsapp: "+4917641178833",
+      email: "hotis@outlook.de",
+      address: "Etzwiesenstrasse 7, 71522 Backnang",
+      serviceArea: "Backnang und Umgebung",
+      heroTitle: "Zuverlaessiger Gartenservice in Backnang und Umgebung",
+      heroText:
+        "Wir kuemmern uns um Hecken, Rasen, Baumarbeiten und laufende Gartenpflege. Sauber, termintreu und mit direktem Ansprechpartner vor Ort.",
+      heroImage:
+        "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=2200&q=85",
+    },
     create: {
       id: "business",
-      companyName: "Gartenservice Grünwert",
-      phone: "+49 170 1234567",
-      whatsapp: "+491701234567",
-      email: "kontakt@gartenservice-gruenwert.de",
-      address: "Musterstraße 12, 50667 Köln",
-      serviceArea: "Köln, Bonn, Leverkusen und Umgebung",
-      heroTitle: "Premium Gartenservice für gepflegte Außenbereiche",
+      companyName: "Gartenservice Sami & Co.",
+      phone: "+49 176 41178833",
+      whatsapp: "+4917641178833",
+      email: "hotis@outlook.de",
+      address: "Etzwiesenstrasse 7, 71522 Backnang",
+      serviceArea: "Backnang und Umgebung",
+      heroTitle: "Zuverlaessiger Gartenservice in Backnang und Umgebung",
       heroText:
-        "Hecken, Rasen, Bäume und komplette Gartenpflege aus einer Hand. Verlässlich, sauber und mit einem Blick fürs Detail.",
+        "Wir kuemmern uns um Hecken, Rasen, Baumarbeiten und laufende Gartenpflege. Sauber, termintreu und mit direktem Ansprechpartner vor Ort.",
       heroImage:
         "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=2200&q=85",
     },
   });
 
   const services = [
-    ["service-1", "Hecke schneiden", "Form- und Pflegeschnitt für saubere Grundstückskanten, Sichtschutzhecken und repräsentative Eingänge.", "Nach Besichtigung", "Scissors", 1],
-    ["service-2", "Rasen mähen", "Regelmäßige Rasenpflege inklusive Kanten, Feinschnitt und saisonaler Pflegeempfehlung.", "Abo möglich", "Leaf", 2],
-    ["service-3", "Bäume fällen", "Sichere Baumfällung, Rückschnitt und Vorbereitung der Entsorgung für private und gewerbliche Flächen.", "Mit Vor-Ort-Prüfung", "TreePine", 3],
-    ["service-4", "Gartenpflege", "Ganzheitliche Pflege von Beeten, Wegen, Sträuchern und Außenanlagen mit einem gepflegten Finish.", "Individuell", "Sprout", 4],
-    ["service-5", "Entsorgung / Abtransport", "Sauberer Abtransport von Grünschnitt, Ästen, Stammholz und Gartenabfällen nach dem Einsatz.", "Optional zubuchbar", "Truck", 5],
+    [
+      "service-1",
+      "Hecke schneiden",
+      "Praeziser Hecken- und Formschnitt fuer gepflegte Grundstuecksgrenzen, Sichtschutzhecken und Einfahrten. Wir arbeiten sauber, achten auf die passende Schnittzeit und nehmen den Gruenschnitt auf Wunsch direkt mit.",
+      "Nach Besichtigung",
+      "Scissors",
+      1,
+    ],
+    [
+      "service-2",
+      "Rasen maehen",
+      "Regelmaessiges Rasenmaehen inklusive sauberer Kanten, ordentlicher Flaechenpflege und kurzer Abstimmung zur saisonalen Pflege. Ideal fuer Privatgaerten, Mietobjekte und kleinere Gewerbeflaechen.",
+      "Einmalig oder regelmaessig",
+      "Leaf",
+      2,
+    ],
+    [
+      "service-3",
+      "Baeume faellen",
+      "Sorgfaeltige Baumfaellung, Rueckschnitt und Vorbereitung des Abtransports nach vorheriger Einschaetzung vor Ort. Wir achten auf Sicherheit, Umgebung und eine ordentliche Uebergabe der Flaeche.",
+      "Mit Vor-Ort-Pruefung",
+      "TreePine",
+      3,
+    ],
+    [
+      "service-4",
+      "Gartenpflege",
+      "Ganzheitliche Gartenpflege fuer Beete, Straeucher, Wege und Aussenanlagen. Wir bringen Struktur in den Garten, entfernen Wildwuchs und sorgen fuer ein gepflegtes Gesamtbild.",
+      "Individuell planbar",
+      "Sprout",
+      4,
+    ],
+    [
+      "service-5",
+      "Entsorgung / Abtransport",
+      "Abtransport von Gruenschnitt, Aesten, Laub, Stammholz und Gartenabfaellen nach dem Einsatz. So bleibt Ihr Garten nicht nur gepflegt, sondern auch direkt sauber nutzbar.",
+      "Optional zubuchbar",
+      "Truck",
+      5,
+    ],
   ];
 
   for (const [id, title, description, priceNote, icon, order] of services) {
@@ -35,37 +82,6 @@ async function main() {
       where: { id },
       update: { title, description, priceNote, icon, order, active: true },
       create: { id, title, description, priceNote, icon, order, active: true },
-    });
-  }
-
-  const projects = [
-    {
-      id: "project-vorgarten",
-      title: "Vorgartenpflege in Köln",
-      location: "Köln-Lindenthal",
-      description: "Heckenschnitt, Rasenkanten und vollständiger Abtransport an einem Arbeitstag.",
-      beforeImage: "https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&w=1200&q=80",
-      afterImage: "https://images.unsplash.com/photo-1591955506264-3f5a6834570a?auto=format&fit=crop&w=1200&q=80",
-      serviceType: "Gartenpflege",
-      featured: true,
-    },
-    {
-      id: "project-hecke",
-      title: "Formschnitt einer Sichtschutzhecke",
-      location: "Bonn",
-      description: "Präziser Rückschnitt einer hohen Hecke mit sauberer Übergabe.",
-      beforeImage: "https://images.unsplash.com/photo-1599685315640-9ceab521f7a0?auto=format&fit=crop&w=1200&q=80",
-      afterImage: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1200&q=80",
-      serviceType: "Hecke schneiden",
-      featured: true,
-    },
-  ];
-
-  for (const project of projects) {
-    await prisma.project.upsert({
-      where: { id: project.id },
-      update: project,
-      create: project,
     });
   }
 }

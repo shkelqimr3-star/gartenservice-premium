@@ -32,14 +32,14 @@ CREATE TABLE "Project" (
 -- CreateTable
 CREATE TABLE "BusinessSettings" (
     "id" TEXT NOT NULL DEFAULT 'business',
-    "companyName" TEXT NOT NULL DEFAULT 'Gartenservice Grünwert',
-    "phone" TEXT NOT NULL DEFAULT '+49 170 1234567',
-    "whatsapp" TEXT NOT NULL DEFAULT '+491701234567',
-    "email" TEXT NOT NULL DEFAULT 'kontakt@gartenservice-gruenwert.de',
-    "address" TEXT NOT NULL DEFAULT 'Musterstraße 12, 50667 Köln',
-    "serviceArea" TEXT NOT NULL DEFAULT 'Köln, Bonn, Leverkusen und Umgebung',
-    "heroTitle" TEXT NOT NULL DEFAULT 'Premium Gartenservice für gepflegte Außenbereiche',
-    "heroText" TEXT NOT NULL DEFAULT 'Hecken, Rasen, Bäume und komplette Gartenpflege aus einer Hand. Verlässlich, sauber und mit einem Blick fürs Detail.',
+    "companyName" TEXT NOT NULL DEFAULT 'Gartenservice Sami & Co.',
+    "phone" TEXT NOT NULL DEFAULT '+49 176 41178833',
+    "whatsapp" TEXT NOT NULL DEFAULT '+4917641178833',
+    "email" TEXT NOT NULL DEFAULT 'hotis@outlook.de',
+    "address" TEXT NOT NULL DEFAULT 'Etzwiesenstrasse 7, 71522 Backnang',
+    "serviceArea" TEXT NOT NULL DEFAULT 'Backnang und Umgebung',
+    "heroTitle" TEXT NOT NULL DEFAULT 'Zuverlaessiger Gartenservice in Backnang und Umgebung',
+    "heroText" TEXT NOT NULL DEFAULT 'Wir kuemmern uns um Hecken, Rasen, Baumarbeiten und laufende Gartenpflege. Sauber, termintreu und mit direktem Ansprechpartner vor Ort.',
     "heroImage" TEXT,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
