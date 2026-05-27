@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { logoutAdmin, requireAdmin } from "@/lib/auth";
+import { sendContactNotification } from "@/lib/email";
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -21,7 +22,18 @@ export async function submitContactRequest(formData: FormData) {
   }
 
   try {
-    await prisma.contactRequest.create({ data: parsed.data });
+    const contactRequest = await prisma.contactRequest.create({ data: parsed.data });
+
+    sendContactNotification({
+      name: contactRequest.name,
+      phone: contactRequest.phone,
+      email: contactRequest.email,
+      service: contactRequest.service,
+      message: contactRequest.message,
+      createdAt: contactRequest.createdAt,
+    }).catch((error) => {
+      console.error("Contact email notification crashed:", error);
+    });
   } catch {
     redirect("/?kontakt=offline#kontakt");
   }

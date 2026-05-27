@@ -20,6 +20,9 @@ Admin login defaults are configured in `.env`:
 ADMIN_EMAIL="admin@gartenservice.de"
 ADMIN_PASSWORD="change-me-now"
 BLOB_READ_WRITE_TOKEN="vercel_blob_read_write_token"
+RESEND_API_KEY="re_xxxxxxxxx"
+CONTACT_TO_EMAIL="hotis@outlook.de"
+CONTACT_FROM_EMAIL="Gartenservice Sami & Co. <kontakt@your-domain.de>"
 ```
 
 ## Database
@@ -55,6 +58,18 @@ BLOB_READ_WRITE_TOKEN="..."
 ```
 
 Uploaded images are stored in Vercel Blob and only the public image URL is saved in Neon/PostgreSQL. Local development falls back to `public/uploads` when `BLOB_READ_WRITE_TOKEN` is not set.
+
+## Email Notifications
+
+Contact form submissions are saved to Neon/PostgreSQL first. After a successful save, the app sends an email notification through Resend. Set these variables in Vercel:
+
+```txt
+RESEND_API_KEY="..."
+CONTACT_TO_EMAIL="hotis@outlook.de"
+CONTACT_FROM_EMAIL="Gartenservice Sami & Co. <kontakt@your-domain.de>"
+```
+
+`CONTACT_FROM_EMAIL` must use a sender domain that is verified in Resend. If email delivery fails, the contact request still remains saved in the admin panel.
 
 ## Useful Commands
 
