@@ -1,8 +1,8 @@
 import { deleteProjectAction, saveProjectAction } from "@/app/actions";
 import { SubmitButton, TextAreaField, TextField } from "@/components/admin-fields";
+import { BlobImageUpload, UploadSubmitGuard } from "@/components/blob-image-upload";
 import { SmartImage } from "@/components/smart-image";
 import { getProjects } from "@/lib/data";
-import { uploadErrorMessage } from "@/lib/uploads";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +13,7 @@ export default async function GalleryAdminPage({
 }) {
   const params = await searchParams;
   const projects = await getProjects();
-  const uploadError = uploadErrorMessage(params?.uploadError);
+  const uploadError = params?.uploadError;
 
   return (
     <div>
@@ -21,7 +21,7 @@ export default async function GalleryAdminPage({
       <h2 className="mt-2 text-4xl font-semibold text-[#17352a]">Projektgalerie</h2>
       {uploadError ? (
         <div className="mt-6 rounded-[8px] border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
-          {uploadError}
+          Bild-Upload fehlgeschlagen. Bitte Format und Dateigroesse pruefen.
         </div>
       ) : null}
       <section className="mt-8 rounded-[8px] border border-[#dfd2bc] bg-white p-6">
@@ -65,6 +65,8 @@ function ProjectForm({
     description: string;
     serviceType?: string | null;
     featured?: boolean;
+    beforeImage?: string | null;
+    afterImage?: string | null;
   };
 }) {
   return (
@@ -73,14 +75,8 @@ function ProjectForm({
       <TextField label="Titel" name="title" defaultValue={project?.title} required />
       <TextField label="Ort" name="location" defaultValue={project?.location} />
       <TextField label="Leistungsart" name="serviceType" defaultValue={project?.serviceType} />
-      <label className="block text-sm font-semibold text-[#17352a]">
-        Vorher-Bild
-        <input name="beforeImage" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" className="mt-2 w-full rounded-[8px] border border-[#dfd2bc] bg-white px-3 py-2 text-sm" />
-      </label>
-      <label className="block text-sm font-semibold text-[#17352a]">
-        Nachher-Bild
-        <input name="afterImage" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" className="mt-2 w-full rounded-[8px] border border-[#dfd2bc] bg-white px-3 py-2 text-sm" />
-      </label>
+      <BlobImageUpload folder="projects" inputName="beforeImage" label="Vorher-Bild" existingUrl={project?.beforeImage} />
+      <BlobImageUpload folder="projects" inputName="afterImage" label="Nachher-Bild" existingUrl={project?.afterImage} />
       <div className="md:col-span-2">
         <TextAreaField label="Beschreibung" name="description" defaultValue={project?.description} />
       </div>
@@ -89,6 +85,7 @@ function ProjectForm({
         Hervorgehoben
       </label>
       <div className="md:text-right">
+        <UploadSubmitGuard />
         <SubmitButton />
       </div>
     </form>
