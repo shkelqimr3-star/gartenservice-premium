@@ -21,7 +21,7 @@ ADMIN_EMAIL="admin@gartenservice.de"
 ADMIN_PASSWORD="change-me-now"
 BLOB_READ_WRITE_TOKEN="vercel_blob_read_write_token"
 RESEND_API_KEY="re_xxxxxxxxx"
-CONTACT_TO_EMAIL="hotis@outlook.de"
+CONTACT_TO_EMAIL="recipient@example.com"
 CONTACT_FROM_EMAIL="Gartenservice Sami & Co. <kontakt@your-domain.de>"
 ```
 
@@ -65,7 +65,7 @@ Contact form submissions are saved to Neon/PostgreSQL first. After a successful 
 
 ```txt
 RESEND_API_KEY="..."
-CONTACT_TO_EMAIL="hotis@outlook.de"
+CONTACT_TO_EMAIL="recipient@example.com"
 CONTACT_FROM_EMAIL="Gartenservice Sami & Co. <kontakt@your-domain.de>"
 ```
 

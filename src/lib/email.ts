@@ -31,8 +31,27 @@ export async function sendContactNotification(input: ContactEmailInput) {
   const to = process.env.CONTACT_TO_EMAIL;
   const from = process.env.CONTACT_FROM_EMAIL;
 
-  if (!apiKey || !to || !from) {
-    console.error("Contact email notification skipped: missing Resend environment variables.");
+  console.log("[contact-email] CONTACT_TO_EMAIL resolved value:", to);
+  console.log("[contact-email] CONTACT_FROM_EMAIL resolved value:", from);
+
+  if (!to) {
+    console.error(
+      "Contact email notification skipped: CONTACT_TO_EMAIL is missing. The contact request remains saved.",
+    );
+    return;
+  }
+
+  if (!from) {
+    console.error(
+      "Contact email notification skipped: CONTACT_FROM_EMAIL is missing. The contact request remains saved.",
+    );
+    return;
+  }
+
+  if (!apiKey) {
+    console.error(
+      "Contact email notification skipped: RESEND_API_KEY is missing. The contact request remains saved.",
+    );
     return;
   }
 
